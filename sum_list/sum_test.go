@@ -30,10 +30,21 @@ func TestSum(t *testing.T) {
 }
 
 func TestSumAll(t *testing.T) {
-	got := SumAll([]int{2, 3}, []int{1, 6, 5})
-	want := []int{5, 12}
+	t.Run("collection of 2 slices", func(t *testing.T) {
+		got := SumAll([]int{2, 3}, []int{1, 6, 5})
+		want := []int{5, 12}
 
-	if !reflect.DeepEqual(got,want) {
-		t.Errorf("got %v want %v", got, want)
-	}
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
+
+	t.Run("empty slice sum must be zero",func(t *testing.T) {
+		got := SumAll([]int{},[]int{2,3})
+		want := []int{0,5}
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	})
 }
