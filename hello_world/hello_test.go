@@ -27,7 +27,6 @@ func TestHello(t *testing.T) {
 		})
 
 		t.Run("saying Hello in Persian",func (t *testing.T)  {
-			const name = ""
 			want := fmt.Sprintf("Salam, %s",name)
 		
 			got := Hello(name,"Persian")
@@ -36,7 +35,6 @@ func TestHello(t *testing.T) {
 			})	
 
 			t.Run("saying Hello in Spanish",func (t *testing.T)  {
-				const name = ""
 				want := fmt.Sprintf("Hola, %s",name)
 			
 				got := Hello(name,"Spanish")
