@@ -9,11 +9,15 @@ func Sum(numbers []int) int {
 }
 
 func SumAll(numbersList ...[]int) []int {
-	slicesCount := len(numbersList)
-	sums := make([]int, slicesCount)
+	var sums []int
 
 	for _, numbers := range numbersList {
-		sums = append(sums,Sum(numbers))
+		if len(numbers) == 0 {
+			sums = append(sums, 0)
+		} else {
+			sums = append(sums, Sum(numbers))
+		}
+
 	}
 	return sums
 }
