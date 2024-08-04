@@ -2,7 +2,7 @@ package hello_world
 
 import "fmt"
 
-func Hello(name string) string {
+func Hello(name, language string) string {
 	if name == "" {
 		name = "World"
 	}
@@ -10,5 +10,5 @@ func Hello(name string) string {
 }
 
 func main() {
-	fmt.Println(Hello("Soroush"))
+	fmt.Println(Hello("Soroush","English"))
 }
