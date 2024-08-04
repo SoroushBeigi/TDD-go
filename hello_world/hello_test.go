@@ -3,9 +3,9 @@ package hello_world
 import "testing"
 
 func TestHello(t *testing.T) {
-	got := Hello("Chris")
+	got := Hello("Soroush")
 
-	want := "Hello, Chris"
+	want := "Hello, Soroush"
 
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
