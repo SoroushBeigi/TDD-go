@@ -15,6 +15,10 @@ func (d Dictionary) Search(word string) (string, error) {
 	}
 }
 
+func (d Dictionary)Add(word,definition string){
+	
+}
+
 func Search(dictionary map[string]string, word string) string {
 	return dictionary[word]
 }
