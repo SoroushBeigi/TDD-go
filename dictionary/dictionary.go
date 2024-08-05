@@ -6,7 +6,6 @@ var (
 	errNotFound               = errors.New("could not find the word you were looking for")
 	errWordExists             = errors.New("cannot add word because it already exists")
 	errWordDoesNotExistUpdate = errors.New("cannot update word because it does not exist")
-	errWordDoesNotExistDelete = errors.New("cannot delete word because it does not exist")
 )
 
 type Dictionary map[string]string
@@ -50,6 +49,6 @@ func (d Dictionary) Update(word, definition string) error {
 	return nil
 }
 
-func (d Dictionary) Delete(word string) error {
-	return nil
+func (d Dictionary) Delete(word string) {
+	delete(d, word)
 }
