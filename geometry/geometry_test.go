@@ -3,12 +3,21 @@ package geometry
 import "testing"
 
 func TestPerimeter(t *testing.T) {
-	rectangle := Rectangle{10.0, 20.0}
-	got := Perimeter(rectangle)
-	want := 60.0
-
-	if got != want {
-		t.Errorf("got %.2f want %.2f", got, want)
+	perimeterTests := []struct {
+		shape Shape
+		want  float64
+		name  string
+	}{
+		{shape: Rectangle{Width: 10, Height: 20}, want: 60.0, name: "Rectangle Perimeter"},
+		{shape: Circle{Radius: 10}, want: 62.83185307179586, name: "Circle Perimeter"},
+	}
+	for _, perimeterTest := range perimeterTests {
+		t.Run(perimeterTest.name, func(t *testing.T) {
+			got := perimeterTest.shape.Perimeter()
+			if got != perimeterTest.want {
+				t.Errorf("%#v got %g want %g", perimeterTest.shape, got, perimeterTest.want)
+			}
+		})
 	}
 }
 
