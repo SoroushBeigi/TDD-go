@@ -3,9 +3,10 @@ package dictionary
 import "errors"
 
 var (
-	errNotFound         = errors.New("could not find the word you were looking for")
-	errWordExists       = errors.New("cannot add word because it already exists")
-	errWordDoesNotExist = errors.New("cannot update word because it does not exist")
+	errNotFound               = errors.New("could not find the word you were looking for")
+	errWordExists             = errors.New("cannot add word because it already exists")
+	errWordDoesNotExistUpdate = errors.New("cannot update word because it does not exist")
+	errWordDoesNotExistDelete = errors.New("cannot delete word because it does not exist")
 )
 
 type Dictionary map[string]string
@@ -39,12 +40,16 @@ func (d Dictionary) Update(word, definition string) error {
 
 	switch err {
 	case errNotFound:
-		return errWordDoesNotExist
+		return errWordDoesNotExistUpdate
 	case nil:
 		d[word] = definition
 	default:
 		return err
 	}
 
+	return nil
+}
+
+func (d Dictionary) Delete(word string) error {
 	return nil
 }
