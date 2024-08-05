@@ -3,8 +3,9 @@ package dictionary
 import "errors"
 
 var (
-	errNotFound   = errors.New("could not find the word you were looking for")
-	errWordExists = errors.New("cannot add word because it already exists")
+	errNotFound         = errors.New("could not find the word you were looking for")
+	errWordExists       = errors.New("cannot add word because it already exists")
+	errWordDoesNotExist = errors.New("cannot update word because it does not exist")
 )
 
 type Dictionary map[string]string
@@ -33,6 +34,17 @@ func (d Dictionary) Add(word, definition string) error {
 	return nil
 }
 
-func (d Dictionary) Update(word,definition string){
-	
+func (d Dictionary) Update(word, definition string) error {
+	_, err := d.Search(word)
+
+	switch err {
+	case errNotFound:
+		return errWordDoesNotExist
+	case nil:
+		d[word] = definition
+	default:
+		return err
+	}
+
+	return nil
 }
