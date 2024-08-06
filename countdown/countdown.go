@@ -40,6 +40,19 @@ func (s *SpyCountdownOperations) Write(p []byte)(n int, err error){
 	return
 }
 
+type ConfigurableSleeper struct {
+	Duration time.Duration
+	Sleep    func(time.Duration)
+}
+
+type SpyTime struct {
+	durationSlept time.Duration
+}
+
+func (s *SpyTime) Sleep(duration time.Duration) {
+	s.durationSlept = duration
+}
+
 const finalWord = "Go!"
 const countdownStart = 3
 
