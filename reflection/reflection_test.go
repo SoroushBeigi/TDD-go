@@ -71,11 +71,19 @@ func TestWalk(t *testing.T) {
 		},
 		{
 			"arrays",
-			[2]Profile {
+			[2]Profile{
 				{21, "Tehran"},
 				{22, "Berlin"},
 			},
 			[]string{"Tehran", "Berlin"},
+		},
+		{
+			"maps",
+			map[string]string{
+				"City":   "Tehran",
+				"Age": "21",
+			},
+			[]string{"Tehran", "21"},
 		},
 	}
 
