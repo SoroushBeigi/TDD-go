@@ -1,6 +1,8 @@
 package reflection
 
-import "reflect"
+import (
+	"reflect"
+)
 
 func walk(x interface{}, fn func(input string)) {
 	val := getValue(x)
@@ -32,7 +34,13 @@ func walk(x interface{}, fn func(input string)) {
 				break
 			}
 		}
+	case reflect.Func:
+		results := val.Call(nil)
+		for _, result := range results {
+			walkValue(result)
+		}
 	}
+
 }
 
 func getValue(i interface{}) reflect.Value {
