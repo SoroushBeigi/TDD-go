@@ -2,7 +2,9 @@ package romannumerals
 
 import (
 	"fmt"
+	"log"
 	"testing"
+	"testing/quick"
 )
 
 var cases = []struct {
@@ -60,5 +62,20 @@ func TestConvertingToArabic(t *testing.T) {
 				t.Errorf("got %d, want %d", got, test.Arabic)
 			}
 		})
+	}
+}
+
+func TestBidirectionalConversion(t *testing.T) {
+	assertion := func(arabic int) bool {
+		if arabic < 0 || arabic > 3999 {
+			log.Println(arabic)
+			return true
+		}
+		roman := ConvertToRoman(arabic)
+		resultArabic := ConvertToArabic(roman)
+		return resultArabic == arabic
+	}
+	if err := quick.Check(assertion, nil); err != nil {
+		t.Error("failed checks", err)
 	}
 }
