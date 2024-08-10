@@ -2,13 +2,12 @@ package romannumerals
 
 import (
 	"fmt"
-	"log"
 	"testing"
 	"testing/quick"
 )
 
 var cases = []struct {
-	Arabic int
+	Arabic uint16
 	Roman  string
 }{
 	{Arabic: 1, Roman: "I"},
@@ -66,11 +65,13 @@ func TestConvertingToArabic(t *testing.T) {
 }
 
 func TestBidirectionalConversion(t *testing.T) {
-	assertion := func(arabic int) bool {
-		if arabic < 0 || arabic > 3999 {
-			log.Println(arabic)
+	assertion := func(arabic uint16) bool {
+		
+		//we do not expect the function to work for numbers greater than 3999
+		if arabic > 3999 {
 			return true
 		}
+		t.Log("testing", arabic)
 		roman := ConvertToRoman(arabic)
 		resultArabic := ConvertToArabic(roman)
 		return resultArabic == arabic
