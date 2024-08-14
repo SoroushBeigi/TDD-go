@@ -1,6 +1,7 @@
 package analog_clock
 
 import (
+	"math"
 	"testing"
 	"time"
 )
@@ -24,5 +25,15 @@ func TestSecondHandAt30Seconds(t *testing.T) {
 
 	if got != want {
 		t.Errorf("Got %v, wanted %v", got, want)
+	}
+}
+
+func TestSecondsInRadians(t *testing.T) {
+	thirtySeconds := time.Date(312, time.October, 28, 0, 0, 30, 0, time.UTC)
+	want := math.Pi
+	got := secondsInRadians(thirtySeconds)
+
+	if want != got {
+		t.Fatalf("Wanted %v radians, but got %v", want, got)
 	}
 }
